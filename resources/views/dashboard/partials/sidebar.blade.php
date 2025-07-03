@@ -30,17 +30,24 @@
                           <span class="badge badge-success">4</span>
                       </a>
                   </li>
-                  <li class="nav-item">
-                      <a href="user.html">
-                          <i class="fas fa-user-friends"></i>
+                   <li class="nav-item" class="{{request()->is('iser*') ? 'active' : ''}}">
+                      <a href="{{route('user.index')}}" >
+                          <i class="fas fa-user"></i>
                           <p>User</p>
                           <span class="badge badge-warning">3</span>
                       </a>
                   </li>
-                  <li class="nav-item">
-                      <a href="hasil-input-user.html">
+                  {{-- <li class="nav-item">
+                      <a href="{{route('ibu-hamil.index')}}" class="{{request()->is('ibu-hamil*') ? 'active' : ''}}">
+                          <i class="fas fa-user-friends"></i>
+                          <p>Data Ibu Hamil</p>
+                          <span class="badge badge-warning">3</span>
+                      </a>
+                  </li> --}}
+                  <li class="nav-item" class="{{request()->is('input-data*') ? 'active' : ''}}">
+                      <a href="{{route('input-data.index')}}" >
                           <i class="fas fa-list"></i>
-                          <p>Hasil Input User</p>
+                          <p>Hasil Input Data</p>
                           <span class="badge badge-info">2</span>
                       </a>
                   </li>
@@ -52,14 +59,14 @@
                       </a>
                   </li>
                   <li class="nav-item">
-                      <a href="makanan.html">
+                      <a href="{{route('menu.index')}}">
                           <i class="fas fa-store"></i>
                           <p>Menu Tersedia</p>
                           <span class="badge badge-info">1</span>
                       </a>
                   </li>
-                  <li class="nav-item">
-                      <a href="makanan.html">
+                  <li class="nav-item {{request()->is('makanan*') ? 'active' : ''}}">
+                      <a href="{{route('makanan.index')}}" class=" ">
                           <i class="fas fa-utensils"></i>
                           <p>Makanan</p>
                           <span class="badge badge-secondary">1</span>

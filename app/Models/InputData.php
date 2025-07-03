@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class InputData extends Model
 {
     use HasFactory;
+
+
+    protected $table = 'input_datas';
+    protected $fillable =
+    [
+        'user_id',
+        'tb',
+        'bb',
+        'trisemester',
+        'aktivitas_harian',
+    ];
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -3,12 +3,12 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>@yield('title', 'Sehatibu')</title>
+    <title>{{$pageName ?? 'Sehatibu '}}</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
-    <link rel="icon" href="kai-admin/assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="{{ asset('kai-admin/assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon" />
 
     <!-- Fonts and icons -->
-    <script src="kai-admin/assets/js/plugin/webfont/webfont.min.js"></script>
+    <script src="{{ asset('kai-admin/assets/js/plugin/webfont/webfont.min.js') }}"></script>
     <script>
         WebFont.load({
             google: {
@@ -21,7 +21,7 @@
                     "Font Awesome 5 Brands",
                     "simple-line-icons",
                 ],
-                urls: ["kai-admin/assets/css/fonts.min.css"],
+                urls: ["{{ asset('kai-admin/assets/css/fonts.min.css') }}"],
             },
             active: function() {
                 sessionStorage.fonts = true;
@@ -30,12 +30,15 @@
     </script>
 
     <!-- CSS Files -->
-    <link rel="stylesheet" href="kai-admin/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="kai-admin/assets/css/plugins.min.css" />
-    <link rel="stylesheet" href="kai-admin/assets/css/kaiadmin.min.css" />
+    <link rel="stylesheet" href="{{ asset('kai-admin/assets/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('kai-admin/assets/css/plugins.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('kai-admin/assets/css/kaiadmin.min.css') }}" />
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link rel="stylesheet" href="kai-admin/assets/css/demo.css" />
+    <link rel="stylesheet" href="{{ asset('kai-admin/assets/css/demo.css') }}" />
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -54,16 +57,21 @@
 
             <div class="container">
                 <div class="page-inner">
-                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
                         <div>
-                            <h3 class="fw-bold mb-3">{{$pageName ?? 'Dashboard'}} </h3>
+                            <h3 class="fw-bold mb-0 ms-3">{{$pageName ?? 'Dashboard'}} </h3>
                             {{-- <h6 class="op-7 mb-2">Rekapitulasi Data Sehatibu</h6> --}}
                         </div>
+
                         {{-- <div class="ms-md-auto py-2 py-md-0">
                             <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
                             <a href="#" class="btn btn-primary btn-round">Add Customer</a>
                         </div> --}}
                     </div>
+
+                </div>
+                <div class=" px-5 py-3">
+                     @yield('content')
 
                 </div>
             </div>
@@ -141,41 +149,41 @@
         <!-- End Custom template -->
     </div>
     <!--   Core JS Files   -->
-    <script src="kai-admin/assets/js/core/jquery-3.7.1.min.js"></script>
-    <script src="kai-admin/assets/js/core/popper.min.js"></script>
-    <script src="kai-admin/assets/js/core/bootstrap.min.js"></script>
+    <script src="{{ asset('kai-admin/assets/js/core/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ asset('kai-admin/assets/js/core/popper.min.js') }}"></script>
+    <script src="{{ asset('kai-admin/assets/js/core/bootstrap.min.js') }}"></script>
 
     <!-- jQuery Scrollbar -->
-    <script src="kai-admin/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+    <script src="{{ asset('kai-admin/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js') }}"></script>
 
     <!-- Chart JS -->
-    <script src="kai-admin/assets/js/plugin/chart.js/chart.min.js"></script>
+    <script src="{{ asset('kai-admin/assets/js/plugin/chart.js/chart.min.js') }}"></script>
 
     <!-- jQuery Sparkline -->
-    <script src="kai-admin/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+    <script src="{{ asset('kai-admin/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js') }}"></script>
 
     <!-- Chart Circle -->
-    <script src="kai-admin/assets/js/plugin/chart-circle/circles.min.js"></script>
+    <script src="{{ asset('kai-admin/assets/js/plugin/chart-circle/circles.min.js') }}"></script>
 
     <!-- Datatables -->
-    <script src="kai-admin/assets/js/plugin/datatables/datatables.min.js"></script>
+    <script src="{{ asset('kai-admin/assets/js/plugin/datatables/datatables.min.js') }}"></script>
 
     <!-- Bootstrap Notify -->
-    <script src="kai-admin/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+    <script src="{{ asset('kai-admin/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 
     <!-- jQuery Vector Maps -->
-    <script src="kai-admin/assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
-    <script src="kai-admin/assets/js/plugin/jsvectormap/world.js"></script>
+    <script src="{{ asset('kai-admin/assets/js/plugin/jsvectormap/jsvectormap.min.js') }}"></script>
+    <script src="{{ asset('kai-admin/assets/js/plugin/jsvectormap/world.js') }}"></script>
 
     <!-- Sweet Alert -->
-    <script src="kai-admin/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+    <script src="{{ asset('kai-admin/assets/js/plugin/sweetalert/sweetalert.min.js') }}"></script>
 
     <!-- Kaiadmin JS -->
-    <script src="kai-admin/assets/js/kaiadmin.min.js"></script>
+    <script src="{{ asset('kai-admin/assets/js/kaiadmin.min.js') }}"></script>
 
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    <script src="kai-admin/assets/js/setting-demo.js"></script>
-    <script src="kai-admin/assets/js/demo.js"></script>
+    <script src="{{ asset('kai-admin/assets/js/setting-demo.js') }}"></script>
+    <script src="{{ asset('kai-admin/assets/js/demo.js') }}"></script>
     <script>
         $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
             type: "line",
@@ -204,6 +212,8 @@
             fillColor: "rgba(255, 165, 52, .14)",
         });
     </script>
+
+    @stack('scripts')
 </body>
 
 </html>

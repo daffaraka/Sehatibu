@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\InputData;
-use App\Models\User;
+use App\Models\Menu;
 use Illuminate\Http\Request;
 
-class InputDataController extends Controller
+class MenuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['pageName'] = 'Daftar Input Data';
-        $data['inputs'] = InputData::with('user')->get();
+        $data['pageName'] = 'Daftar Menu Makanan';
+        $data['menu'] = Menu::all();
 
-        return view('dashboard.input-data.input-data-index', $data);
+        return view('dashboard.menu-makanan.menu-makanan-index', $data);
     }
 
     /**
@@ -24,10 +23,7 @@ class InputDataController extends Controller
      */
     public function create()
     {
-        $data['pageName'] = 'Daftar Input Data';
-        $data['users'] = User::all();
-
-        return view('dashboard.input-data.input-data-create', $data);
+        //
     }
 
     /**
@@ -41,7 +37,7 @@ class InputDataController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(InputData $inputData)
+    public function show(Menu $menu)
     {
         //
     }
@@ -49,7 +45,7 @@ class InputDataController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(InputData $inputData)
+    public function edit(Menu $menu)
     {
         //
     }
@@ -57,7 +53,7 @@ class InputDataController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, InputData $inputData)
+    public function update(Request $request, Menu $menu)
     {
         //
     }
@@ -65,7 +61,7 @@ class InputDataController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InputData $inputData)
+    public function destroy(Menu $menu)
     {
         //
     }

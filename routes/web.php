@@ -1,7 +1,12 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MakananController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\IbuHamilController;
+use App\Http\Controllers\InputDataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +35,9 @@ Route::get('/', function () {
 
 Route::view('dashboard','dashboard/layout');
 Route::view('layout', 'dashboard/base-layout');
-
+Route::resource('user',UserController::class);
+// Route::resource('ibu-hamil',IbuHamilController::class);
+Route::resource('input-data',InputDataController::class);
+Route::resource('makanan',MakananController::class);
+Route::resource('menu',MenuController::class);
 require __DIR__.'/auth.php';

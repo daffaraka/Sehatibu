@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\InputData;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class InputDataController extends Controller
+class IbuHamilController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['pageName'] = 'Daftar Input Data';
-        $data['inputs'] = InputData::with('user')->get();
-
-        return view('dashboard.input-data.input-data-index', $data);
+        $users = User::all();
+        return view('dashboard.users.user-index',compact('users'));
     }
 
     /**
@@ -24,10 +21,7 @@ class InputDataController extends Controller
      */
     public function create()
     {
-        $data['pageName'] = 'Daftar Input Data';
-        $data['users'] = User::all();
-
-        return view('dashboard.input-data.input-data-create', $data);
+        //
     }
 
     /**
@@ -41,7 +35,7 @@ class InputDataController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(InputData $inputData)
+    public function show(string $id)
     {
         //
     }
@@ -49,7 +43,7 @@ class InputDataController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(InputData $inputData)
+    public function edit(string $id)
     {
         //
     }
@@ -57,7 +51,7 @@ class InputDataController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, InputData $inputData)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -65,8 +59,10 @@ class InputDataController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(InputData $inputData)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('user.index')->with('success', 'User berhasil dihapus.');
     }
 }
