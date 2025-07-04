@@ -1,9 +1,8 @@
 @extends('dashboard.layout')
 @section('content')
-    <div class="d-flex justify-content-between mb-4">
-        <h4 class="h4">Makanan</h4>
+    <div class="d-flex justify-content-end mb-4">
 
-        <a href="{{ route('makanan.create') }}" class="btn btn-primary">Tambah Makanan</a>
+        <a href="{{ route('menu.create') }}" class="btn btn-primary">Tambah Menu</a>
     </div>
 
     <hr class="my-4">
@@ -14,59 +13,32 @@
             <thead>
                 <tr class="table-dark text-white">
                     <th class="px-4 py-2 text-left">ID</th>
-                    <th class="px-4 py-2 text-left">Gambar Makanan</th>
-                    <th class="px-4 py-2 text-left">Nama Makanan</th>
-                    <th class="px-4 py-2 text-left">Type Protein</th>
-                    <th class="px-4 py-2 text-left">Type Makanan</th>
-                    <th class="px-4 py-2 text-left">Protein (gram)</th>
-                    <th class="px-4 py-2 text-left">Karbohidrat (gram)</th>
-                    <th class="px-4 py-2 text-left">Lemak (gram)</th>
-                    <th class="px-4 py-2 text-left">Asam Folat (gram)</th>
-                    <th class="px-4 py-2 text-left">Aksi</th>
+                    <th class="px-4 py-2 text-left">Nama Menu Makanan</th>
+                    <th class="px-4 py-2 text-left">Daftar Makanan</th>
+
                 </tr>
             </thead>
             <tbody>
-                @foreach ($makanans as $makanan)
+                @foreach ($menus as $menu)
                     <tr>
                         <td class="px-4 py-2">{{ $loop->iteration }}</td>
-                        <td class="px-4 py-2">
-                            <img src="{{ asset($makanan->gambar_makanan)}}" alt="Gambar Makanan"
-                                class="img-thumbnail d-block mb-2">
-                        </td>
-                        <td class="px-4 py-2">{{ $makanan->nama_makanan }}</td>
-                        <td class="px-4 py-2">
-                            @if ($makanan->type_makanan == 'Makanan')
-                                <span class="badge bg-dark">Makanan</span>
-                            @else
-                                <span class="badge bg-light text-dark">Minuman</span>
-                            @endif
-                        </td>
-                        <td class="px-4 py-2">
-                            @if ($makanan->type_protein == 'Nabati')
-                                <span class="badge bg-success">Nabati</span>
-                            @else
-                                <span class="badge bg-info">Hewani</span>
-                            @endif
-                        </td>
-                        <td class="px-4 py-2">{{ $makanan->protein }}</td>
-                        <td class="px-4 py-2">{{ $makanan->karbohidrat }}</td>
-                        <td class="px-4 py-2">{{ $makanan->lemak }}</td>
-                        <td class="px-4 py-2">{{ $makanan->asam_folat }}</td>
+                        <td class="px-4 py-2">{{ $menu->nama_menu }}</td>
+                        <td class="px-4 py-2">{{ $menu->menu }}</td>
                         <td class="px-4 py-2">
                             <div class="btn-group gap-2" role="group">
-                                <a href="{{ route('makanan.edit', $makanan->id) }}" class="btn btn-sm btn-success">
+                                <a href="{{ route('menu.edit', $menu->id) }}" class="btn btn-sm btn-success">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <a href="{{ route('makanan.show', $makanan->id) }}" class="btn btn-sm btn-secondary">
+                                <a href="{{ route('menu.show', $menu->id) }}" class="btn btn-sm btn-secondary">
                                     <i class="fas fa-eye"></i>
                                 </a>
 
-                                  <form action="{{ route('makanan.destroy', $makanan->id) }}" method="POST" id="form_delete"
+                                  <form action="{{ route('menu.destroy', $menu->id) }}" method="POST" id="form_delete"
                                     class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger btn-sm deleteBtn"
-                                        data-id="{{ $makanan->id }}" data-nama="{{ $makanan->nama_makanan }}">
+                                        data-id="{{ $menu->id }}" data-nama="{{ $menu->menu }}">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
@@ -87,12 +59,12 @@
 
             Swal.fire({
                 title: 'Apakah kamu yakin?',
-                text: "Anda tidak dapat mengembalikan makanan ini!",
+                text: "Anda tidak dapat mengembalikan menu ini!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, hapus makanan ini!'
+                confirmButtonText: 'Ya, hapus menu ini!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     e.preventDefault();

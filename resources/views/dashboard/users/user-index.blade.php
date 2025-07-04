@@ -1,8 +1,8 @@
 @extends('dashboard.layout')
 @section('content')
     <div class="container">
-        <div class="d-flex justify-content-between mb-4">
-            <h4 class="h4">User</h4>
+        <div class="d-flex justify-content-end mb-4">
+            {{-- <h4 class="h4">User</h4> --}}
 
 
             <a href="{{ route('user.create') }}" class="btn btn-primary">Tambah
@@ -42,21 +42,23 @@
                         </td>
                         <td class="px-4 py-2">
                             <div class="d-flex gap-2">
-                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-outline-success p-2">
+                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-success p-2">
                                     <i class="fas fa-edit text-sm"></i>
                                 </a>
-                                <form action="{{ route('user.destroy', $user->id) }}" method="POST" id="form_delete"
+
+                                <a href="{{ route('user.show', $user->id) }}" class="btn btn-secondary p-2">
+                                    <i class="fas fa-eye text-sm"></i>
+                                </a>
+
+                                   <form action="{{ route('user.destroy', $user->id) }}" method="POST" id="form_delete"
                                     class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="button" class="btn btn-outline-danger p-2 deleteBtn"
+                                    <button type="button" class="btn btn-danger p-2 deleteBtn"
                                         data-id="{{ $user->id }}" data-nama="{{ $user->name }}">
                                         <i class="fas fa-trash text-sm"></i>
                                     </button>
                                 </form>
-                                <a href="{{ route('user.show', $user->id) }}" class="btn btn-outline-secondary p-2">
-                                    <i class="fas fa-eye text-sm"></i>
-                                </a>
                             </div>
                         </td>
                     </tr>

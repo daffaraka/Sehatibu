@@ -1,7 +1,6 @@
 @extends('dashboard.layout')
 @section('content')
-    <div class="d-flex justify-content-between mb-4">
-        <h4 class="h4">Makanan</h4>
+    <div class="d-flex justify-content-end mb-4">
 
         <a href="{{ route('makanan.create') }}" class="btn btn-primary">Tambah Makanan</a>
     </div>

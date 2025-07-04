@@ -1,60 +1,67 @@
 @extends('dashboard.layout')
-@section('title', 'Tambah User')
 @section('content')
+    <style>
+        select option {
+            color: black;
+        }
+
+        .select2.select2-container {
+            /* width: 50% !important; */
+            /* margin-right: 2vh; */
+        }
+
+        .select2-container .select2-selection--single {
+            width: auto;
+            display: flex;
+            height: auto;
+            line-height: inherit;
+            padding: 0.5rem 1rem;
+        }
+
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            padding-left: unset;
+        }
+    </style>
     <div class="">
 
         @include('dashboard.flash')
 
-        <form action="{{ route('makanan.store') }}" method="POST" id="form_create" enctype="multipart/form-data">
+        <form action="{{ route('menu.store') }}" method="POST" id="form_create" enctype="multipart/form-data">
             @csrf
 
-
-
             <div class="mb-3">
-                <img src="" alt="gambar makanan" id="previewMakanan" class="img-thumbnail d-block mb-2 w-25">
-                <label for="">Gambar Makanan</label>
-                <input type="file" id="gambar" class="form-control" name="gambar_makanan" accept="image/*">
-            </div>
-            <div class="mb-3">
-                <label for="">Nama Makanan/Minuman</label>
+                <label for="">Nama Menu</label>
                 <input type="text" class="form-control" name="nama_makanan" required value="{{ old('nama_makanan') }}">
             </div>
-            <div class="mb-3">
-                <label class="form-label font-semibold">Type Makanan</label>
-                <select name="type_makanan" class="form-select" required>
-                    <option value="">-- Pilih Type Makanan --</option>
-                    <option value="makanan" {{ old('type_makanan') == 'Makanan' ? 'selected' : '' }}>Makanan</option>
-                    <option value="minuman" {{ old('type_makanan') == 'Minuman' ? 'selected' : '' }}>Minuman</option>
-                </select>
-            </div>
 
-            <div class="mb-3">
-                <label class="form-label font-semibold">Type Protein</label>
-                <select name="type_protein" class="form-select" required>
-                    <option value="">-- Pilih Type Protein --</option>
-                    <option value="nabati" {{ old('type_protein') == 'Nabati' ? 'selected' : '' }}>Nabati</option>
-                    <option value="hewani" {{ old('type_protein') == 'Hewani' ? 'selected' : '' }}>Hewani</option>
-                </select>
-            </div>
 
-            <div class="mb-3">
-                <label class="form-label font-semibold">Protein (Gram) </label>
-                <input type="number" class="form-control" name="protein" required value="{{ old('protein', 0) }}">
-            </div>
+            <div class="card p-3 rounded-0 shadow-sm">
+                <label for="">Tambah Daftar Makanan</label>
 
-            <div class="mb-3">
-                <label class="form-label font-semibold">Karbohidrat (Gram)</label>
-                <input type="number" class="form-control" name="karbohidrat" required value="{{ old('karbohidrat', 0) }}">
-            </div>
+                <div id="inputFormRow">
+                    <div class="input-group mb-3">
+                        <select class="livesearch form-control d-flex" name="nama_makanan[]">
+                            <option value="">Pilih Makanan</option>
+                            @foreach ($makanan as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama_makanan }}</option>
+                            @endforeach
+                        </select>
+                        {{-- <input type="number" name="jumlah_bahan_baku[]" required class="form-control w-25 text-dark"
+                            placeholder="Jumlah Bahan Baku" autocomplete="on">
+                        <select name="satuan[]" class="form-control text-dark" id="">
+                            <option value="Gram">Gram</option>
+                            <option value="Pcs">Pcs</option>
+                            <option value="Butir">Butir</option>
+                        </select> --}}
+                        <div class="input-group-append">
+                            <button id="removeRow" type="button" class="btn btn-danger">Kurangi</button>
+                        </div>
+                    </div>
+                </div>
 
-            <div class="mb-3">
-                <label class="form-label font-semibold">Lemak (Gram)</label>
-                <input type="number" class="form-control" name="lemak" required value="{{ old('lemak', 0) }}">
-            </div>
+                <div id="newRow"></div>
+                <button id="addRow" type="button" class="btn btn-sm btn-secondary mb-4">Tambah Input Makanan</button>
 
-            <div class="mb-3">
-                <label class="form-label font-semibold">Asam Folat (Gram)</label>
-                <input type="number" class="form-control" name="asam_folat" required value="{{ old('asam_folat', 0) }}">
             </div>
 
             <div class="d-flex justify-content-between mt-3">
@@ -68,41 +75,79 @@
 
 
 @push('scripts')
-<script>
-    // $(document).ready(function() {
-    //     $('#form_create').submit(function(e) {
-    //         e.preventDefault();
+    <script>
+        $(document).ready(function() {
+            $('.livesearch').select2();
+        });
+        // $(document).ready(function() {
+        //     $('#form_create').submit(function(e) {
+        //         e.preventDefault();
 
-    //         $.ajax({
-    //             url: $(this).attr('action'),
-    //             method: $(this).attr('method'),
-    //             data: new FormData(this),
-    //             processData: false,
-    //             dataType: 'json',
-    //             contentType: false,
-    //             success: function(response) {
-    //                 if (response.status) {
-    //                     swal("Berhasil", response.message, "success");
-    //                     window.location.href = "{{ route('input-data.index') }}";
-    //                 } else {
-    //                     swal("Gagal", response.message, "error");
-    //                 }
-    //             },
-    //             error: function(xhr, ajaxOptions, thrownError) {
-    //                 swal("Gagal", xhr.responseText, "error");
-    //             }
-    //         });
-    //     });
-    // });
+        //         $.ajax({
+        //             url: $(this).attr('action'),
+        //             method: $(this).attr('method'),
+        //             data: new FormData(this),
+        //             processData: false,
+        //             dataType: 'json',
+        //             contentType: false,
+        //             success: function(response) {
+        //                 if (response.status) {
+        //                     swal("Berhasil", response.message, "success");
+        //                     window.location.href = "{{ route('input-data.index') }}";
+        //                 } else {
+        //                     swal("Gagal", response.message, "error");
+        //                 }
+        //             },
+        //             error: function(xhr, ajaxOptions, thrownError) {
+        //                 swal("Gagal", xhr.responseText, "error");
+        //             }
+        //         });
+        //     });
+        // });
 
 
-    $('#gambar').change(function() {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#previewMakanan').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(this.files[0]);
-    });
-</script>
+        $("#addRow").click(function() {
+
+            // Get the JSON data as an array
+            var makananArray = {!! $makanan !!};
+
+            // Create the options HTML using a loop
+            var options = '';
+            var html = '';
+            html += '<div id="inputFormRow">';
+            html += '<div class="input-group mb-3">';
+            html +=
+                '<select class="livesearch form-control d-flex" name="nama_makanan[]">';
+            html += '<option value="">Pilih Makanan</option>';
+            $.each(makananArray, function(key, menu) {
+                html += '<option value="' + menu.id + '">' + menu.nama_makanan + '</option>';
+            });
+            html += '</select>';
+            html +=
+                '<div class="input-group-append">';
+            html += '<button id="removeRow" type="button" class="btn btn-danger">Kurangi</button>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+
+            // Append the new row to #newRow
+
+            $('#newRow').append(html);
+            $('.livesearch').select2();
+        });
+
+        // remove row
+        $(document).on('click', '#removeRow', function() {
+            $(this).closest('#inputFormRow').remove();
+        });
+
+
+        $('#gambar').change(function() {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#previewMakanan').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+    </script>
 @endpush
-

@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>{{$pageName ?? 'Sehatibu '}}</title>
+    <title>{{ $pageName ?? 'Sehatibu ' }}</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="{{ asset('kai-admin/assets/img/kaiadmin/favicon.ico') }}" type="image/x-icon" />
 
@@ -37,6 +37,8 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{ asset('kai-admin/assets/css/demo.css') }}" />
 
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
@@ -59,7 +61,7 @@
                 <div class="page-inner">
                     <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2">
                         <div>
-                            <h3 class="fw-bold mb-0 ms-3">{{$pageName ?? 'Dashboard'}} </h3>
+                            <h3 class="fw-bold mb-0 ms-3">{{ $pageName ?? 'Dashboard' }} </h3>
                             {{-- <h6 class="op-7 mb-2">Rekapitulasi Data Sehatibu</h6> --}}
                         </div>
 
@@ -71,7 +73,7 @@
 
                 </div>
                 <div class=" px-5 py-3">
-                     @yield('content')
+                    @yield('content')
 
                 </div>
             </div>
@@ -184,6 +186,8 @@
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
     <script src="{{ asset('kai-admin/assets/js/setting-demo.js') }}"></script>
     <script src="{{ asset('kai-admin/assets/js/demo.js') }}"></script>
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
             type: "line",

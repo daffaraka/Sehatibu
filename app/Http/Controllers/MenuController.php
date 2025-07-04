@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Makanan;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class MenuController extends Controller
     public function index()
     {
         $data['pageName'] = 'Daftar Menu Makanan';
-        $data['menu'] = Menu::all();
+        $data['menus'] = Menu::all();
 
         return view('dashboard.menu-makanan.menu-makanan-index', $data);
     }
@@ -23,7 +24,10 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        $data['pageName'] = 'Tambah Menu Baru';
+        $data['makanan'] = Makanan::all();
+
+        return view('dashboard.menu-makanan.menu-makanan-create', $data);
     }
 
     /**

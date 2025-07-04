@@ -39,12 +39,16 @@ class UserController extends Controller
 
     public function show(User $user)
     {
-        return view('dashboard.users.user-show', compact('user'));
+        $data['pageName'] = 'Detail User';
+        $data['user'] = $user;
+        return view('dashboard.users.user-show', $data);
     }
 
     public function edit(User $user)
     {
-        return view('dashboard.users.user-edit', compact('user'));
+        $data['pageName'] = 'Edit User';
+        $data['user'] = $user;
+        return view('dashboard.users.user-edit', $data);
     }
 
     public function update(Request $request, User $user)
@@ -58,7 +62,7 @@ class UserController extends Controller
             'role' => 'sometimes|string|in:admin,opd,walidata',
         ]);
 
-        $user->update($request->only('name', 'email', 'alamat','nomor_telepon','role'));
+        $user->update($request->only('name', 'email', 'alamat', 'nomor_telepon', 'role'));
 
         return redirect()->route('user.index')->with('success', 'User berhasil diperbarui');
     }
@@ -69,4 +73,3 @@ class UserController extends Controller
         return redirect()->route('user.index')->with('success', 'User deleted successfully');
     }
 }
-
