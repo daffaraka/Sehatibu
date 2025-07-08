@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->date('tanggal_lahir');
             $table->string('role');
+            $table->integer('usia');
+
             $table->rememberToken();
             $table->timestamps();
         });

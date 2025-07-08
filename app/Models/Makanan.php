@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\MenuMakanan;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Makanan extends Model
 {
@@ -18,5 +19,12 @@ class Makanan extends Model
         'karbohidrat',
         'lemak',
         'asam_folat',
+        'zat_besi'
     ];
+
+
+    public function makanans()
+    {
+        return $this->hasMany(MenuMakanan::class);
+    }
 }

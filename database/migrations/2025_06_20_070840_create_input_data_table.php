@@ -17,6 +17,8 @@ return new class extends Migration
             $table->float('tb');
             $table->float('bb');
             $table->string('trisemester');
+            $table->integer('usia');
+
             $table->enum('aktivitas_harian', ['ringan', 'sedang', 'berat']);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

@@ -18,6 +18,7 @@ class InputData extends Model
         'bb',
         'trisemester',
         'aktivitas_harian',
+        'usia'
     ];
 
 

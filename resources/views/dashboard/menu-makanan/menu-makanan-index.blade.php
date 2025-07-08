@@ -13,8 +13,15 @@
             <thead>
                 <tr class="table-dark text-white">
                     <th class="px-4 py-2 text-left">ID</th>
-                    <th class="px-4 py-2 text-left">Nama Menu Makanan</th>
-                    <th class="px-4 py-2 text-left">Daftar Makanan</th>
+                    <th class="px-4 py-2 text-left w-25">Nama Menu Makanan</th>
+                    <th class="px-4 py-2 text-left">Skor AHP</th>
+
+                    <th class="px-4 py-2 text-left">Protein</th>
+                    <th class="px-4 py-2 text-left">Lemak</th>
+                    <th class="px-4 py-2 text-left">Karbohidrat</th>
+                    <th class="px-4 py-2 text-left">Zat Besi</th>
+                    <th class="px-4 py-2 text-left">Asam Folat</th>
+                    <th class="px-4 py-2 text-left">Aksi</th>
 
                 </tr>
             </thead>
@@ -23,7 +30,13 @@
                     <tr>
                         <td class="px-4 py-2">{{ $loop->iteration }}</td>
                         <td class="px-4 py-2">{{ $menu->nama_menu }}</td>
-                        <td class="px-4 py-2">{{ $menu->menu }}</td>
+                        <th class="px-4 py-2 text-left">Skor AHP</th>
+
+                        <td class="px-4 py-2">{{ number_format($menu->total_protein, 0) }} Gram</td>
+                        <td class="px-4 py-2">{{ number_format($menu->total_lemak, 0) }} Gram</td>
+                        <td class="px-4 py-2">{{ number_format($menu->total_karbohidrat, 0) }} Gram</td>
+                        <td class="px-4 py-2">{{ number_format($menu->total_zat_besi, 0) }} Gram</td>
+                        <td class="px-4 py-2">{{ number_format($menu->total_asam_folat, 0) }} Gram</td>
                         <td class="px-4 py-2">
                             <div class="btn-group gap-2" role="group">
                                 <a href="{{ route('menu.edit', $menu->id) }}" class="btn btn-sm btn-success">
@@ -33,7 +46,7 @@
                                     <i class="fas fa-eye"></i>
                                 </a>
 
-                                  <form action="{{ route('menu.destroy', $menu->id) }}" method="POST" id="form_delete"
+                                <form action="{{ route('menu.destroy', $menu->id) }}" method="POST" id="form_delete"
                                     class="inline">
                                     @csrf
                                     @method('DELETE')
@@ -80,6 +93,5 @@
         //     text: 'Data makanan berhasil dihapus!',
         //     confirmButtonText: 'OK'
         // });
-
     </script>
 @endpush

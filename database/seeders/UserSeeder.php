@@ -20,12 +20,14 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'tanggal_lahir' => now(),
             'role' => 'admin',
+            'usia' => 30
         ]);
 
         for ($i = 1; $i <= 10; $i++) {
             User::factory()->create([
                 'name' => "User $i",
                 'email' => "user$i@user.com",
+                'usia' => rand(20,70),
                 'password' => Hash::make("password$i"),
                 'tanggal_lahir' => now()->subDays($i),
                 'role' => 'user',

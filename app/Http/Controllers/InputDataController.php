@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\InputData;
+use App\Models\Menu;
 use App\Models\User;
+use App\Models\InputData;
 use Illuminate\Http\Request;
 
 class InputDataController extends Controller
@@ -68,5 +69,38 @@ class InputDataController extends Controller
     public function destroy(InputData $inputData)
     {
         //
+    }
+
+
+    public function perhitunganAhp($input)
+    {
+        $kriteria = [
+            'protein' => 0.5,
+            'lemak' => 0.2,
+            'karbohidrat' => 0.2,
+            'zat_besi' => 0.05,
+            'asam_folat' => 0.05,
+        ];
+
+        $menus = Menu::all()->toArray();
+
+        $maxValues = [];
+        foreach ($kriteria as $key => $bobot) {
+            $maxValues[$key] = max(array_column($menus, $key));
+        }
+
+
+
+        $scores = [];
+        foreach ($menus as $menuName => $nutrients) {
+            $score = 0;
+            foreach ($kriteria as $k => $bobot) {
+                $normalized = $nutrients[$k] / $maxValues[$k];
+                $score += $bobot * $normalized;
+            }
+            $scores[$menuName] = $score;
+        }
+
+        arsort($scores); // Urutkan skor tertinggi ke bawah
     }
 }

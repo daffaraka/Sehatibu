@@ -21,6 +21,8 @@
                     <th class="px-4 py-2 text-left">Karbohidrat (gram)</th>
                     <th class="px-4 py-2 text-left">Lemak (gram)</th>
                     <th class="px-4 py-2 text-left">Asam Folat (gram)</th>
+                    <th class="px-4 py-2 text-left">Zat besi (gram)</th>
+
                     <th class="px-4 py-2 text-left">Aksi</th>
                 </tr>
             </thead>
@@ -29,7 +31,7 @@
                     <tr>
                         <td class="px-4 py-2">{{ $loop->iteration }}</td>
                         <td class="px-4 py-2">
-                            <img src="{{ asset($makanan->gambar_makanan)}}" alt="Gambar Makanan"
+                            <img src="{{ asset($makanan->gambar_makanan) }}" alt="Gambar Makanan"
                                 class="img-thumbnail d-block mb-2">
                         </td>
                         <td class="px-4 py-2">{{ $makanan->nama_makanan }}</td>
@@ -51,6 +53,8 @@
                         <td class="px-4 py-2">{{ $makanan->karbohidrat }}</td>
                         <td class="px-4 py-2">{{ $makanan->lemak }}</td>
                         <td class="px-4 py-2">{{ $makanan->asam_folat }}</td>
+                                                <td class="px-4 py-2">{{ $makanan->zat_besi }}</td>
+
                         <td class="px-4 py-2">
                             <div class="btn-group gap-2" role="group">
                                 <a href="{{ route('makanan.edit', $makanan->id) }}" class="btn btn-sm btn-success">
@@ -60,7 +64,7 @@
                                     <i class="fas fa-eye"></i>
                                 </a>
 
-                                  <form action="{{ route('makanan.destroy', $makanan->id) }}" method="POST" id="form_delete"
+                                <form action="{{ route('makanan.destroy', $makanan->id) }}" method="POST" id="form_delete"
                                     class="inline">
                                     @csrf
                                     @method('DELETE')
@@ -107,6 +111,5 @@
         //     text: 'Data makanan berhasil dihapus!',
         //     confirmButtonText: 'OK'
         // });
-
     </script>
 @endpush

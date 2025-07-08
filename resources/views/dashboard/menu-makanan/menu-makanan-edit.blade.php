@@ -1,70 +1,72 @@
 @extends('dashboard.layout')
-@section('title', 'Edit Makananan')
 @section('content')
+    <style>
+        select option {
+            color: black;
+        }
+
+        .select2.select2-container {
+            /* width: 50% !important; */
+            /* margin-right: 2vh; */
+        }
+
+        .select2-container .select2-selection--single {
+            width: auto;
+            display: flex;
+            height: auto;
+            line-height: inherit;
+            padding: 0.5rem 1rem;
+        }
+
+        .select2-container .select2-selection--single .select2-selection__rendered {
+            padding-left: unset;
+        }
+    </style>
     <div class="">
 
         @include('dashboard.flash')
 
-        <form action="{{ route('makanan.update',$makanan->id) }}" method="POST" id="form_create" enctype="multipart/form-data">
-            @csrf
+        <form action="{{ route('menu.update', $menu->id) }}" method="POST" id="form_create" enctype="multipart/form-data">
             @method('PUT')
-
-
-            <div class="mb-3">
-                <img src="{{ asset($makanan->gambar_makanan) }}" alt="gambar makanan" id="previewMakanan"
-                    class="img-thumbnail d-block mb-2 w-25">
-                <label for="">Gambar Makanan</label>
-                <input type="file" id="gambar" class="form-control" name="gambar_makanan" accept="image/*">
-            </div>
-            <div class="mb-3">
-                <label for="">Nama Makanan/Minuman</label>
-                <input type="text" class="form-control" name="nama_makanan" required
-                    value="{{ $makanan->nama_makanan ?? old('nama_makanan') }}">
-            </div>
-            <div class="mb-3">
-                <label class="form-label font-semibold">Type Makanan</label>
-                <select name="type_makanan" class="form-select" required>
-                    <option value="">-- Pilih Type Makanan --</option>
-                    <option value="makanan"
-                        {{ $makanan->type_makanan == 'Makanan' ? 'selected' : '' }}>Makanan
-                    </option>
-                    <option value="minuman"
-                        {{ $makanan->type_makanan == 'Minuman' ? 'selected' : '' }}>Minuman
-                    </option>
-                </select>
-            </div>
+            @csrf
 
             <div class="mb-3">
-                <label class="form-label font-semibold">Type Protein</label>
-                <select name="type_protein" class="form-select" required>
-                    <option value="">-- Pilih Type Protein --</option>
-                    <option value="nabati" {{ $makanan->type_protein == 'Nabati' ? 'selected' : '' }}>Nabati</option>
-                    <option value="hewani" {{ $makanan->type_protein == 'Hewani' ? 'selected' : '' }}>Hewani</option>
-                </select>
+                <label for="">Nama Menu</label>
+                <input type="text" class="form-control" name="nama_menu" required
+                    value="{{ $menu->nama_menu ?? old('nama_menu') }}">
             </div>
 
-            <div class="mb-3">
-                <label class="form-label font-semibold">Protein (Gram) </label>
-                <input type="number" class="form-control" name="protein" required value="{{ $makanan->protein }}">
-            </div>
 
-            <div class="mb-3">
-                <label class="form-label font-semibold">Karbohidrat (Gram)</label>
-                <input type="number" class="form-control" name="karbohidrat" required value="{{ $makanan->karbohidrat }}">
-            </div>
+            <div class="card p-3 rounded-0 shadow-sm">
+                <label for="">Tambah Daftar Makanan</label>
 
-            <div class="mb-3">
-                <label class="form-label font-semibold">Lemak (Gram)</label>
-                <input type="number" class="form-control" name="lemak" required value="{{ $makanan->lemak }}">
-            </div>
 
-            <div class="mb-3">
-                <label class="form-label font-semibold">Asam Folat (Gram)</label>
-                <input type="number" class="form-control" name="asam_folat" required value="{{ $makanan->asam_folat }}">
+                @foreach ($menu->makanans as $menuMakan)
+                    <div id="inputFormRow">
+
+
+                        <div class="input-group mb-3">
+                            <select class="livesearch form-control d-flex" name="makanan_id[]">
+                                <option value="">Pilih Makanan</option>
+                                @foreach ($makanan as $item)
+                                    <option value="{{ $item->id }}" {{ $item->id == $menuMakan->id ? 'selected' : '' }}>{{ $item->nama_makanan }}</option>
+                                @endforeach
+                            </select>
+                            <div class="input-group-append">
+                                <button id="removeRow" type="button" class="btn btn-danger">Kurangi</button>
+                            </div>
+                        </div>
+
+                    </div>
+                @endforeach
+
+                <div id="newRow"></div>
+                <button id="addRow" type="button" class="btn btn-sm btn-secondary mb-4">Tambah Input Makanan</button>
+
             </div>
 
             <div class="d-flex justify-content-between mt-3">
-                <button type="submit" class="btn btn-primary ">Perbarui</button>
+                <button type="submit" class="btn btn-primary ">Simpan Perubahan Menu Makanan</button>
                 <a href="{{ route('input-data.index') }}" class="btn btn-dark">Kembali</a>
             </div>
         </form>
@@ -75,31 +77,46 @@
 
 @push('scripts')
     <script>
-        // $(document).ready(function() {
-        //     $('#form_create').submit(function(e) {
-        //         e.preventDefault();
+        $(document).ready(function() {
+            $('.livesearch').select2();
+        });
 
-        //         $.ajax({
-        //             url: $(this).attr('action'),
-        //             method: $(this).attr('method'),
-        //             data: new FormData(this),
-        //             processData: false,
-        //             dataType: 'json',
-        //             contentType: false,
-        //             success: function(response) {
-        //                 if (response.status) {
-        //                     swal("Berhasil", response.message, "success");
-        //                     window.location.href = "{{ route('input-data.index') }}";
-        //                 } else {
-        //                     swal("Gagal", response.message, "error");
-        //                 }
-        //             },
-        //             error: function(xhr, ajaxOptions, thrownError) {
-        //                 swal("Gagal", xhr.responseText, "error");
-        //             }
-        //         });
-        //     });
-        // });
+
+
+        $("#addRow").click(function() {
+
+            // Get the JSON data as an array
+            var makananArray = {!! $makanan !!};
+
+            // Create the options HTML using a loop
+            var options = '';
+            var html = '';
+            html += '<div id="inputFormRow">';
+            html += '<div class="input-group mb-3">';
+            html +=
+                '<select class="livesearch form-control d-flex" name="makanan_id[]">';
+            html += '<option value="">Pilih Makanan</option>';
+            $.each(makananArray, function(key, menu) {
+                html += '<option value="' + menu.id + '">' + menu.nama_makanan + '</option>';
+            });
+            html += '</select>';
+            html +=
+                '<div class="input-group-append">';
+            html += '<button id="removeRow" type="button" class="btn btn-danger">Kurangi</button>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+
+            // Append the new row to #newRow
+
+            $('#newRow').append(html);
+            $('.livesearch').select2();
+        });
+
+        // remove row
+        $(document).on('click', '#removeRow', function() {
+            $(this).closest('#inputFormRow').remove();
+        });
 
 
         $('#gambar').change(function() {

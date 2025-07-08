@@ -43,6 +43,7 @@ class MakananController extends Controller
             'karbohidrat' => 'required|numeric',
             'lemak' => 'required|numeric',
             'asam_folat' => 'required|numeric',
+            'zat_besi' => 'required|numeric'
         ], [
             'gambar.required' => 'Gambar makanan harus diunggah.',
             'gambar.image' => 'File yang diunggah harus berupa gambar.',
@@ -55,6 +56,8 @@ class MakananController extends Controller
             'karbohidrat.required' => 'Karbohidrat harus diisi.',
             'lemak.required' => 'Lemak harus diisi.',
             'asam_folat.required' => 'Asam folat harus diisi.',
+                        'zat_besi.required' => 'Zat besi harus diisi.',
+
         ]);
 
 
@@ -74,6 +77,7 @@ class MakananController extends Controller
             'karbohidrat' => $request->karbohidrat,
             'lemak' => $request->lemak,
             'asam_folat' => $request->asam_folat,
+            'zat_besi' => $request->zat_besi
         ]);
 
         return redirect()->route('makanan.index')->with('success', 'Makanan berhasil ditambahkan');
@@ -114,6 +118,7 @@ class MakananController extends Controller
             'karbohidrat' => 'required|numeric',
             'lemak' => 'required|numeric',
             'asam_folat' => 'required|numeric',
+            'zat_besi' => 'required|numeric'
         ], [
             'gambar.required' => 'Gambar makanan harus diunggah.',
             'gambar.image' => 'File yang diunggah harus berupa gambar.',
@@ -126,6 +131,7 @@ class MakananController extends Controller
             'karbohidrat.required' => 'Karbohidrat harus diisi.',
             'lemak.required' => 'Lemak harus diisi.',
             'asam_folat.required' => 'Asam folat harus diisi.',
+            'zat_besi.required' => 'Zat besi harus diisi.',
         ]);
 
 

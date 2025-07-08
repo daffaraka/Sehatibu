@@ -16,8 +16,16 @@ class Menu extends Model
 
 
 
-    public function makanan()
+    public function makanans()
     {
-        return $this->hasMan(MenuMakanan::class);
+        return $this->hasMany(MenuMakanan::class);
     }
+
+
+    // public function menu_makanan()
+    // {
+    //     return $this->belongsToMany(Makanan::class, 'menu_makanan', 'menu_id', 'makanan_id')
+    //         ->withPivot('isMakananPokok') // field tambahan dari pivot
+    //         ->withTimestamps(); // jika pakai timestamps di tabel pivot
+    // }
 }

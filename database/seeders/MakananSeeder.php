@@ -31,6 +31,7 @@ class MakananSeeder extends Seeder
             $makanan->karbohidrat = rand(1,1000);
             $makanan->lemak = rand(1,1000);
             $makanan->asam_folat = rand(1,1000);
+            $makanan->zat_besi = rand(1,1000);
             $makanan->save();
         }
     }

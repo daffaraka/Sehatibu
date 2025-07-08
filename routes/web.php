@@ -20,7 +20,7 @@ use App\Http\Controllers\InputDataController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(url('dashboard'));
 });
 
 // Route::get('/dashboard', function () {

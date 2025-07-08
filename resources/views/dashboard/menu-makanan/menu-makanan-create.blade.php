@@ -31,7 +31,7 @@
 
             <div class="mb-3">
                 <label for="">Nama Menu</label>
-                <input type="text" class="form-control" name="nama_makanan" required value="{{ old('nama_makanan') }}">
+                <input type="text" class="form-control" name="nama_menu" required value="{{ old('nama_menu') }}">
             </div>
 
 
@@ -40,19 +40,12 @@
 
                 <div id="inputFormRow">
                     <div class="input-group mb-3">
-                        <select class="livesearch form-control d-flex" name="nama_makanan[]">
+                        <select class="livesearch form-control d-flex" name="makanan_id[]">
                             <option value="">Pilih Makanan</option>
                             @foreach ($makanan as $item)
                                 <option value="{{ $item->id }}">{{ $item->nama_makanan }}</option>
                             @endforeach
                         </select>
-                        {{-- <input type="number" name="jumlah_bahan_baku[]" required class="form-control w-25 text-dark"
-                            placeholder="Jumlah Bahan Baku" autocomplete="on">
-                        <select name="satuan[]" class="form-control text-dark" id="">
-                            <option value="Gram">Gram</option>
-                            <option value="Pcs">Pcs</option>
-                            <option value="Butir">Butir</option>
-                        </select> --}}
                         <div class="input-group-append">
                             <button id="removeRow" type="button" class="btn btn-danger">Kurangi</button>
                         </div>
@@ -65,7 +58,7 @@
             </div>
 
             <div class="d-flex justify-content-between mt-3">
-                <button type="submit" class="btn btn-primary ">Tambahkan</button>
+                <button type="submit" class="btn btn-primary ">Simpan Menu Makanan</button>
                 <a href="{{ route('input-data.index') }}" class="btn btn-dark">Kembali</a>
             </div>
         </form>
@@ -79,31 +72,7 @@
         $(document).ready(function() {
             $('.livesearch').select2();
         });
-        // $(document).ready(function() {
-        //     $('#form_create').submit(function(e) {
-        //         e.preventDefault();
 
-        //         $.ajax({
-        //             url: $(this).attr('action'),
-        //             method: $(this).attr('method'),
-        //             data: new FormData(this),
-        //             processData: false,
-        //             dataType: 'json',
-        //             contentType: false,
-        //             success: function(response) {
-        //                 if (response.status) {
-        //                     swal("Berhasil", response.message, "success");
-        //                     window.location.href = "{{ route('input-data.index') }}";
-        //                 } else {
-        //                     swal("Gagal", response.message, "error");
-        //                 }
-        //             },
-        //             error: function(xhr, ajaxOptions, thrownError) {
-        //                 swal("Gagal", xhr.responseText, "error");
-        //             }
-        //         });
-        //     });
-        // });
 
 
         $("#addRow").click(function() {
@@ -117,7 +86,7 @@
             html += '<div id="inputFormRow">';
             html += '<div class="input-group mb-3">';
             html +=
-                '<select class="livesearch form-control d-flex" name="nama_makanan[]">';
+                '<select class="livesearch form-control d-flex" name="makanan_id[]">';
             html += '<option value="">Pilih Makanan</option>';
             $.each(makananArray, function(key, menu) {
                 html += '<option value="' + menu.id + '">' + menu.nama_makanan + '</option>';

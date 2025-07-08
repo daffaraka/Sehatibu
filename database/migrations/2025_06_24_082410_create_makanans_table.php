@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('karbohidrat');
             $table->integer('lemak');
             $table->integer('asam_folat');
+            $table->integer('zat_besi');
             $table->timestamps();
         });
     }

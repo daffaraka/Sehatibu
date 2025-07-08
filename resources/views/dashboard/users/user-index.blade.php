@@ -18,7 +18,7 @@
                 <tr class="bg-blue-200 border-2">
                     <th class="px-4 py-2 text-left">Nama</th>
                     <th class="px-4 py-2 text-left">Email</th>
-                    <th class="px-4 py-2 text-left">Alamat</th>
+                    <th class="px-4 py-2 text-left">Usia</th>
                     <th class="px-4 py-2 text-left">Role</th>
                     <th class="px-4 py-2 text-left">Tanggal Dibuat</th>
                     <th class="px-4 py-2 text-left">Aksi</th>
@@ -29,7 +29,7 @@
                     <tr class="border border-1">
                         <td class="px-4 py-2">{{ $user->name }}</td>
                         <td class="px-4 py-2">{{ $user->email }}</td>
-                        <td class="px-4 py-2">{{ $user->instansi->alamat_instansi ?? '-' }}</td>
+                        <td class="px-4 py-2">{{ $user->usia ?? '-' }}</td>
                         <td class="px-4 py-2">
                             @if ($user->role == 'admin')
                                 <span class="badge badge-info">Admin</span>

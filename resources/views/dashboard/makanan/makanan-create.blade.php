@@ -57,6 +57,11 @@
                 <input type="number" class="form-control" name="asam_folat" required value="{{ old('asam_folat', 0) }}">
             </div>
 
+            <div class="mb-3">
+                <label class="form-label font-semibold">Zat Besi (Gram)</label>
+                <input type="number" class="form-control" name="zat_besi" required value="{{ old('zat_besi', 0) }}">
+            </div>
+
             <div class="d-flex justify-content-between mt-3">
                 <button type="submit" class="btn btn-primary ">Tambahkan</button>
                 <a href="{{ route('input-data.index') }}" class="btn btn-dark">Kembali</a>
@@ -68,41 +73,40 @@
 
 
 @push('scripts')
-<script>
-    // $(document).ready(function() {
-    //     $('#form_create').submit(function(e) {
-    //         e.preventDefault();
+    <script>
+        // $(document).ready(function() {
+        //     $('#form_create').submit(function(e) {
+        //         e.preventDefault();
 
-    //         $.ajax({
-    //             url: $(this).attr('action'),
-    //             method: $(this).attr('method'),
-    //             data: new FormData(this),
-    //             processData: false,
-    //             dataType: 'json',
-    //             contentType: false,
-    //             success: function(response) {
-    //                 if (response.status) {
-    //                     swal("Berhasil", response.message, "success");
-    //                     window.location.href = "{{ route('input-data.index') }}";
-    //                 } else {
-    //                     swal("Gagal", response.message, "error");
-    //                 }
-    //             },
-    //             error: function(xhr, ajaxOptions, thrownError) {
-    //                 swal("Gagal", xhr.responseText, "error");
-    //             }
-    //         });
-    //     });
-    // });
+        //         $.ajax({
+        //             url: $(this).attr('action'),
+        //             method: $(this).attr('method'),
+        //             data: new FormData(this),
+        //             processData: false,
+        //             dataType: 'json',
+        //             contentType: false,
+        //             success: function(response) {
+        //                 if (response.status) {
+        //                     swal("Berhasil", response.message, "success");
+        //                     window.location.href = "{{ route('input-data.index') }}";
+        //                 } else {
+        //                     swal("Gagal", response.message, "error");
+        //                 }
+        //             },
+        //             error: function(xhr, ajaxOptions, thrownError) {
+        //                 swal("Gagal", xhr.responseText, "error");
+        //             }
+        //         });
+        //     });
+        // });
 
 
-    $('#gambar').change(function() {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            $('#previewMakanan').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(this.files[0]);
-    });
-</script>
+        $('#gambar').change(function() {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#previewMakanan').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(this.files[0]);
+        });
+    </script>
 @endpush
-

@@ -29,6 +29,7 @@ class UserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'usia' => $request->usia,
             'password' => bcrypt($request->password),
             'tanggal_lahir' => $request->tanggal_lahir,
             'role' => $request->role,
@@ -62,7 +63,7 @@ class UserController extends Controller
             'role' => 'sometimes|string|in:admin,opd,walidata',
         ]);
 
-        $user->update($request->only('name', 'email', 'alamat', 'nomor_telepon', 'role'));
+        $user->update($request->only('name', 'email', 'alamat', 'nomor_telepon', 'role','usia'));
 
         return redirect()->route('user.index')->with('success', 'User berhasil diperbarui');
     }
